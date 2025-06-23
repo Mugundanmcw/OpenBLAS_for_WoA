@@ -28,6 +28,8 @@ jobs:
         
       - name: Setup visual studio
         uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: arm64
         
       - name: Install LLVM for Win-ARM64
         shell: pwsh
