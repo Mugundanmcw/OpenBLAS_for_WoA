@@ -44,7 +44,9 @@ jobs:
         run: |
           Invoke-WebRequest https://github.com/Kitware/CMake/releases/download/v4.0.3/cmake-4.0.3-windows-arm64.msi -UseBasicParsing -OutFile cmake-arm64.msi
           Start-Process msiexec.exe -ArgumentList "/i cmake-arm64.msi /quiet /norestart" -Wait
-          echo "C:\Program Files\CMake\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          $currentPath = $env:PATH
+          $newPath = "C:\Program Files\CMake\bin;$currentPath"
+          echo "PATH=$newPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           
       - name: Install Ninja Build System
         shell: pwsh
